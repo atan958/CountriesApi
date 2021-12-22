@@ -25,10 +25,10 @@ namespace CountriesApi.Controllers
             return Ok(dataService.GetAll().Take(count));
         }
         
-        [HttpGet("default")]
+        [HttpGet("[action]")]
         public ActionResult<Country> Get(string id)
         {
-            var country = DbQueryManager.GetA(id);
+            var country = dataService.Get(id);
             if (country is null)
             {
                 return NotFound();
@@ -36,37 +36,37 @@ namespace CountriesApi.Controllers
             return Ok(country);
         }
 
-        [HttpPost("default")]
+        [HttpPost("[action]")]
         public IActionResult Post([FromBody] Country country)
         {
             // Can perform checks to see if format of inputted object is correct
 
-            DbQueryManager.Post(country);
+            dataService.Post(country);
             return Ok(country);
         }
 
-        [HttpPut("default")]
+        [HttpPut("[action]")]
         public IActionResult Put([FromQuery] string id, [FromBody] Country country)
         {
-            var updateCountry = DbQueryManager.GetA(id);
+            var updateCountry = dataService.Get(id);
             if (updateCountry is null)
             {
                 return NotFound();
             }
-            DbQueryManager.Put(id, country);
+            dataService.Put(id, country);
             return Ok(country);
         }
 
-        [HttpDelete("default")]
+        [HttpDelete("[action]")]
         public IActionResult Delete([FromQuery] string id)
         {
-            Country deleteCountry = DbQueryManager.GetA(id);
+            Country deleteCountry = dataService.Get(id);
             if (deleteCountry is null)
             {
                 return BadRequest();
             }
 
-            DbQueryManager.Delete(id);
+            dataService.Delete(id);
             return Ok(deleteCountry);
         }
     }

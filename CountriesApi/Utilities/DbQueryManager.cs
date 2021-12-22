@@ -17,6 +17,21 @@ namespace CountriesApi.Utilities
         {
             throw new NotImplementedException();
         }
+
+        public void Post(Country country)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Put(string id, Country country)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
     public class DbQueryManager : IDataService
     {
@@ -54,12 +69,12 @@ namespace CountriesApi.Utilities
             return countryList;
         }
 
-        public Country Get(string id)
+        public Country GetA(string id)
         {
             return GetAll().Where(c => c.Id == Convert.ToInt32(id)).FirstOrDefault();
         }
 
-        public static Country GetA(string id)
+        public Country Get(string id)
         {
             List<Country> countryList = new();
             var queryString = "SELECT *\n" +
@@ -93,7 +108,7 @@ namespace CountriesApi.Utilities
                                                     //          Objects (e.g. country) are null by default;
         }
 
-        public static void Post(Country country)
+        public void Post(Country country)
         {
             var active = country.Active ? "1" : "0";
             var queryString = $"INSERT INTO tb_country (country, active)\n" +
@@ -114,7 +129,7 @@ namespace CountriesApi.Utilities
             country.Id = GetNewestId();
         }
 
-        private static int GetNewestId()
+        private int GetNewestId()
         {
             var queryString = "SELECT TOP 1 id\n" + 
                           "FROM tb_country\n" + 
@@ -140,7 +155,7 @@ namespace CountriesApi.Utilities
             return -1;
         }
 
-        public static void Put(string id, Country country)
+        public void Put(string id, Country country)
         {
             var active = country.Active ? "1" : "0";
             var queryString = $"UPDATE tb_country\n" +
@@ -162,7 +177,7 @@ namespace CountriesApi.Utilities
             country.Id = Convert.ToInt32(id);
         }
 
-        public static void Delete(string id)
+        public void Delete(string id)
         {
             string queryString = $"DELETE FROM tb_country WHERE id={id}";
 
