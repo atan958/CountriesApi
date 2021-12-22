@@ -28,7 +28,7 @@ namespace CountriesApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CountriesApi", Version = "v1" });
             });
 
-            services.AddSingleton<IDataService, DbQueryManager>();
+            services.AddSingleton<IDataService, SqlDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
