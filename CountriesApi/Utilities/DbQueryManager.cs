@@ -58,6 +58,7 @@ namespace CountriesApi.Utilities
         {
             return GetAll().Where(c => c.Id == Convert.ToInt32(id)).FirstOrDefault();
         }
+
         public static Country GetA(string id)
         {
             List<Country> countryList = new();
